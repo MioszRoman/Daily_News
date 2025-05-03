@@ -1,8 +1,9 @@
 import requests
 from send_emails import send_email
 
+topic = "apple"
 api_key = "4224d33c07df4f80bc495528bff66e70"
-url = "https://newsapi.org/v2/everything?q=apple&from=2025-04-"\
+url = f"https://newsapi.org/v2/everything?q={topic}&from=2025-04-"\
       "30&to=2025-04-30&sortBy=popularity&apiKey=4224d33c07df4f80bc495528bff66e70&language=en"
 
 #Make a request
@@ -16,10 +17,10 @@ descriptions = []
 
 dicts = {}
 
-body = ""
+body = "Subject: Greetings!" + "\n"
 
 #Access the article titles and description
-for article in content['articles']:
+for article in content['articles'][:15]:
       titles.append(article['title'])
       descriptions.append(article['description'])
       dicts.update({article['title']: article['description']})
