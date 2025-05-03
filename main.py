@@ -29,7 +29,17 @@ for article in content['articles'][:15]:
 
 body = body.encode('utf-8')
 
-
+#Send email with titles, descriptions and links to the article
 decision = input("Type if you want to send email: (Y/N) ")
 if decision == 'Y' or decision == 'y':
       send_email(message=body)
+"""
+url_of_image = "https://en.wikipedia.org/wiki/File:Ezio_Auditore_da_Firenze.png"
+
+response = requests.get(url_of_image)
+
+print(response.text)
+
+with open("image.png", "wb") as file:
+      file.write(response.content)
+      """
