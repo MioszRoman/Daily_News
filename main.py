@@ -14,26 +14,21 @@ content = request.json()
 titles = []
 descriptions = []
 
-dict = {}
+dicts = {}
 
+body = ""
 
 #Access the article titles and description
 for article in content['articles']:
       titles.append(article['title'])
       descriptions.append(article['description'])
-      dict.update({article['title']: article['description']})
+      dicts.update({article['title']: article['description']})
+      if article['description'] is not None:
+            body = body + article['title'] + ':\n' + article['description'] + 2 * '\n'
+
+body = body.encode('utf-8')
 
 
-raw_message = f"""
-Subject: 5 news from apis
-
-Title: {titles[0]}
-
-Description: {descriptions[0]}
-
-"""
-"""
 decision = input("Type if you want to send email: (Y/N) ")
 if decision == 'Y':
-      send_email(raw_message)
-"""
+      send_email(message=body)
