@@ -3,7 +3,7 @@ from send_emails import send_email
 
 api_key = "4224d33c07df4f80bc495528bff66e70"
 url = "https://newsapi.org/v2/everything?q=apple&from=2025-04-"\
-      "30&to=2025-04-30&sortBy=popularity&apiKey=4224d33c07df4f80bc495528bff66e70"
+      "30&to=2025-04-30&sortBy=popularity&apiKey=4224d33c07df4f80bc495528bff66e70&language=en"
 
 #Make a request
 request = requests.get(url)
@@ -24,11 +24,11 @@ for article in content['articles']:
       descriptions.append(article['description'])
       dicts.update({article['title']: article['description']})
       if article['description'] is not None:
-            body = body + article['title'] + ':\n' + article['description'] + 2 * '\n'
+            body = body + article['title'] + ':\n' + article['description'] +"\nIf you wanna see, check this link: " + article['url'] + 2 * '\n'
 
 body = body.encode('utf-8')
 
 
 decision = input("Type if you want to send email: (Y/N) ")
-if decision == 'Y':
+if decision == 'Y' or decision == 'y':
       send_email(message=body)
